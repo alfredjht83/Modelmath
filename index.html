@@ -3,29 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Singapore PSLE Math Game</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        h1 { text-align: center; }
-        .game-container { max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
-        .question { margin: 20px 0; }
-        .options { list-style-type: none; padding: 0; }
-        .options li { margin: 10px 0; }
-    </style>
+    <title>PSLE Math Game</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="game-container">
-        <h1>Singapore PSLE Math Game</h1>
-        <div class="question">
-            <p>Question: What is 7 + 8?</p>
-        </div>
-        <ul class="options">
-            <li><button>A) 14</button></li>
-            <li><button>B) 15</button></li>
-            <li><button>C) 16</button></li>
-            <li><button>D) 13</button></li>
+    <header>
+        <h1>Welcome to the PSLE Math Game!</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#menu">Main Menu</a></li>
+            <li><a href="#game">Game</a></li>
+            <li><a href="#results">Results</a></li>
+            <li><a href="#leaderboard">Leaderboard</a></li>
         </ul>
-        <p>Good luck!</p>
-    </div>
+    </nav>
+    <main>
+        <section id="menu">
+            <h2>Main Menu</h2>
+            <button onclick="startGame()">Start Game</button>
+            <button onclick="selectDifficulty()">Select Difficulty</button>
+        </section>
+        <section id="difficulty-selection" style="display:none;">
+            <h2>Select Difficulty</h2>
+            <button onclick="setDifficulty('easy')">Easy</button>
+            <button onclick="setDifficulty('medium')">Medium</button>
+            <button onclick="setDifficulty('hard')">Hard</button>
+        </section>
+        <section id="game" style="display:none;">
+            <h2>Game Screen</h2>
+            <div id="question">Question will appear here</div>
+            <input type="text" id="answer" placeholder="Your answer">
+            <button onclick="submitAnswer()">Submit</button>
+        </section>
+        <section id="results" style="display:none;">
+            <h2>Results</h2>
+            <div id="score">Your score will be displayed here</div>
+            <button onclick="goToLeaderboard()">View Leaderboard</button>
+        </section>
+        <section id="leaderboard" style="display:none;">
+            <h2>Leaderboard</h2>
+            <div id="scores">Top scores will be displayed here</div>
+            <button onclick="goToMenu()">Back to Menu</button>
+        </section>
+    </main>
+    <script src="script.js"></script>
 </body>
 </html>
