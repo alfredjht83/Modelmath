@@ -3,50 +3,412 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PSLE Math Game</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Singapore PSLE Math Game - Modelmath</title>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    width: 100%;
+    padding: 40px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    margin: -40px -40px 30px -40px;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+main section {
+    display: none;
+    animation: fadeIn 0.3s ease-in;
+}
+
+main section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+section h2 {
+    color: #667eea;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 10px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+#menu {
+    text-align: center;
+}
+
+#menu button {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 15px auto;
+    padding: 15px;
+    font-size: 1.1em;
+}
+
+#difficulty-selection {
+    text-align: center;
+}
+
+#difficulty-selection button {
+    min-width: 150px;
+    margin: 10px;
+}
+
+#game {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+#question {
+    font-size: 1.3em;
+    margin-bottom: 30px;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+    background: white;
+    border-left: 4px solid #667eea;
+    border-radius: 5px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1em;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+#stats {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+#results {
+    text-align: center;
+    background: #f0f7ff;
+    padding: 30px;
+    border-radius: 10px;
+    border: 2px solid #667eea;
+}
+
+#score {
+    font-size: 2em;
+    color: #667eea;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+#leaderboard {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+table th, table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+table tr:hover {
+    background: #f0f0f0;
+}
+
+table tbody tr:nth-child(1) { font-weight: bold; color: #ff9800; }
+table tbody tr:nth-child(2) { color: #c0c0c0; }
+table tbody tr:nth-child(3) { color: #cd7f32; }
+
+@media (max-width: 600px) {
+    .container { padding: 20px; }
+    header { margin: -20px -20px 20px -20px; padding: 20px; }
+    header h1 { font-size: 1.8em; }
+    button { padding: 10px 20px; font-size: 0.9em; }
+    #question { font-size: 1.1em; }
+} 
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to the PSLE Math Game!</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="#menu">Main Menu</a></li>
-            <li><a href="#game">Game</a></li>
-            <li><a href="#results">Results</a></li>
-            <li><a href="#leaderboard">Leaderboard</a></li>
-        </ul>
-    </nav>
-    <main>
-        <section id="menu">
-            <h2>Main Menu</h2>
-            <button onclick="startGame()">Start Game</button>
-            <button onclick="selectDifficulty()">Select Difficulty</button>
-        </section>
-        <section id="difficulty-selection" style="display:none;">
-            <h2>Select Difficulty</h2>
-            <button onclick="setDifficulty('easy')">Easy</button>
-            <button onclick="setDifficulty('medium')">Medium</button>
-            <button onclick="setDifficulty('hard')">Hard</button>
-        </section>
-        <section id="game" style="display:none;">
-            <h2>Game Screen</h2>
-            <div id="question">Question will appear here</div>
-            <input type="text" id="answer" placeholder="Your answer">
-            <button onclick="submitAnswer()">Submit</button>
-        </section>
-        <section id="results" style="display:none;">
-            <h2>Results</h2>
-            <div id="score">Your score will be displayed here</div>
-            <button onclick="goToLeaderboard()">View Leaderboard</button>
-        </section>
-        <section id="leaderboard" style="display:none;">
-            <h2>Leaderboard</h2>
-            <div id="scores">Top scores will be displayed here</div>
-            <button onclick="goToMenu()">Back to Menu</button>
-        </section>
-    </main>
-    <script src="script.js"></script>
+    <div class="container">
+        <header>
+            <h1>🎮 Modelmath - PSLE Math Game</h1>
+            <p>Learn Mathematical Modelling the Fun Way!</p>
+        </header>
+
+        <main>
+            <section id="menu" class="active">
+                <h2>Welcome to Modelmath!</h2>
+                <p style="margin-bottom: 20px; font-size: 1.1em;">Master Singapore PSLE mathematical modelling through interactive gameplay.</p>
+                <button onclick="startGame()">Start Game</button>
+                <button onclick="showLeaderboard()">View Leaderboard</button>
+            </section>
+
+            <section id="difficulty-selection">
+                <h2>Select Difficulty Level</h2>
+                <p style="margin-bottom: 20px;">Choose your challenge level:</p>
+                <button onclick="selectDifficulty('easy')" style="background: #4CAF50;">🟢 Easy</button>
+                <button onclick="selectDifficulty('medium')" style="background: #FF9800;">🟡 Medium</button>
+                <button onclick="selectDifficulty('hard')" style="background: #f44336;">🔴 Hard</button>
+                <br>
+                <button onclick="backToMenu()" style="background: #999;">Back</button>
+            </section>
+
+            <section id="game">
+                <div id="stats">Score: 0 | Question: 1/5</div>
+                <div id="question">Loading question...</div>
+                <input type="text" id="answer" placeholder="Type your answer here...">
+                <button onclick="submitAnswer()" style="width: 100%; margin: 0;">Submit Answer</button>
+                <button onclick="backToMenu()" style="width: 100%; background: #999; margin: 10px 0 0 0;">Back to Menu</button>
+            </section>
+
+            <section id="results">
+                <h2>Game Over!</h2>
+                <div id="score">Your Score: 0</div>
+                <button onclick="startGame()">Play Again</button>
+                <button onclick="backToMenu()" style="background: #999;">Back to Menu</button>
+            </section>
+
+            <section id="leaderboard">
+                <h2>🏆 Leaderboard</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Player</th>
+                            <th>Score</th>
+                            <th>Difficulty</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboardBody">
+                        <tr><td colspan="4" style="text-align: center;">Loading...</td></tr>
+                    </tbody>
+                </table>
+                <button onclick="backToMenu()" style="width: 100%; margin-top: 20px;">Back to Menu</button>
+            </section>
+        </main>
+    </div>
+
+    <script>
+// Game Questions Database
+const questionsDatabase = {
+    easy: [
+        { q: "What is 5 + 3?", a: "8" },
+        { q: "What is 10 - 4?", a: "6" },
+        { q: "What is 3 × 4?", a: "12" },
+        { q: "What is 20 ÷ 5?", a: "4" },
+        { q: "A box has 12 apples. You eat 3. How many are left?", a: "9" }
+    ],
+    medium: [
+        { q: "If a car travels at 60 km/h, how far in 1.5 hours?", a: "90" },
+        { q: "25% of 200 is?", a: "50" },
+        { q: "A rectangle: length 8cm, width 5cm. Area?", a: "40" },
+        { q: "If tickets cost $8 each, cost for 12 tickets?", a: "96" },
+        { q: "A baker makes 24 cupcakes. Packs in boxes of 6. How many boxes?", a: "4" }
+    ],
+    hard: [
+        { q: "Ratio of boys:girls is 3:2. Total 30 students. How many boys?", a: "18" },
+        { q: "Car travels 240km in 4 hours. Speed in km/h?", a: "60" },
+        { q: "3 numbers in ratio 2:3:5, sum=100. Largest number?", a: "50" },
+        { q: "Tank: 2m × 1.5m × 1m. Volume in m³?", a: "3" },
+        { q: "8 workers finish in 15 days. 12 workers need? days", a: "10" }
+    ]
+};
+
+// Game State
+let gameState = {
+    difficulty: 'easy',
+    currentQuestion: 0,
+    score: 0,
+    questions: [],
+    leaderboard: JSON.parse(localStorage.getItem('modelmath_scores')) || [
+        { name: "Champion", score: 500, difficulty: "hard" },
+        { name: "Expert", score: 420, difficulty: "medium" },
+        { name: "Player", score: 350, difficulty: "easy" }
+    ]
+};
+
+// Show/Hide Sections
+function showSection(sectionId) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    document.getElementById(sectionId).classList.add('active');
+}
+
+// Start Game
+function startGame() {
+    showSection('difficulty-selection');
+}
+
+// Select Difficulty
+function selectDifficulty(difficulty) {
+    gameState.difficulty = difficulty;
+    gameState.questions = questionsDatabase[difficulty];
+    gameState.currentQuestion = 0;
+    gameState.score = 0;
+    showSection('game');
+    loadQuestion();
+}
+
+// Load Question
+function loadQuestion() {
+    const q = gameState.questions[gameState.currentQuestion];
+    document.getElementById('question').textContent = q.q;
+    document.getElementById('answer').value = '';
+    document.getElementById('answer').focus();
+    updateStats();
+}
+
+// Update Stats Display
+function updateStats() {
+    const progress = gameState.currentQuestion + 1;
+    document.getElementById('stats').textContent = `Score: ${gameState.score} | Question: ${progress}/${gameState.questions.length}`;
+}
+
+// Submit Answer
+function submitAnswer() {
+    const userAnswer = document.getElementById('answer').value.trim().toLowerCase();
+    const correctAnswer = gameState.questions[gameState.currentQuestion].a.trim().toLowerCase();
+    
+    if (userAnswer === correctAnswer) {
+        gameState.score += 10;
+        alert('✅ Correct!');
+    } else {
+        alert(`❌ Wrong! The correct answer was: ${gameState.questions[gameState.currentQuestion].a}`);
+    }
+
+    gameState.currentQuestion++;
+    if (gameState.currentQuestion < gameState.questions.length) {
+        loadQuestion();
+    } else {
+        endGame();
+    }
+}
+
+// End Game
+function endGame() {
+    document.getElementById('score').textContent = `Your Score: ${gameState.score}`;
+    saveScore();
+    showSection('results');
+}
+
+// Save Score to Leaderboard
+function saveScore() {
+    const entry = { name: "You", score: gameState.score, difficulty: gameState.difficulty };
+    gameState.leaderboard.push(entry);
+    gameState.leaderboard.sort((a, b) => b.score - a.score);
+    gameState.leaderboard = gameState.leaderboard.slice(0, 10);
+    localStorage.setItem('modelmath_scores', JSON.stringify(gameState.leaderboard));
+}
+
+// Display Leaderboard
+function showLeaderboard() {
+    const tbody = document.getElementById('leaderboardBody');
+    tbody.innerHTML = '';
+    gameState.leaderboard.forEach((entry, index) => {
+        const row = `<tr>
+            <td>${index + 1}</td>
+            <td>${entry.name}</td>
+            <td>${entry.score}</td>
+            <td>${entry.difficulty.toUpperCase()}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+    });
+    showSection('leaderboard');
+}
+
+// Back to Menu
+function backToMenu() {
+    showSection('menu');
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('answer').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') submitAnswer();
+    });
+});
+    </script>
 </body>
 </html>
