@@ -1,20 +1,38 @@
 # Modelmath
 
-Welcome to Modelmath, a strategic math game that challenges players with a variety of mathematical problems.
-
-## Game Objective
-The objective of the game is to solve math problems and reach the highest score possible. Players are given a set of problems to solve within a limited time frame.
-
-## Gameplay Features
-- **Various Difficulty Levels:** Players can choose from easy, medium, and hard problems.
-- **Timed Challenges:** Each round is timed to increase the level of challenge.
-- **Score Tracking:** Players' scores are tracked to encourage competitive gameplay.
+## Game Features
+- Engaging math puzzles that reinforce critical thinking.
+- Various difficulty levels catering to different age groups.
+- Interactive gameplay that maintains student interest.
+- Instant feedback on answers to encourage learning.
 
 ## How to Play
-1. Select your difficulty level.
-2. Complete the math problems presented to you.
-3. Submit your answers within the time limit.
-4. Review your score at the end of each round.
+- Start the game by selecting a difficulty level.
+- Solve math puzzles presented on the screen.
+- Use hints sparingly; they are limited.
+- Submit answers to receive immediate feedback.
 
-## Getting Started
-To start playing Modelmath, clone the repository and run the game using your preferred programming environment.
+## Game Mechanics
+- Players are timed on each puzzle to encourage speed and accuracy.
+- Points are awarded for correct answers; faster answers yield higher points.
+- There are special rewards for completing a series of puzzles without hints.
+
+## Learning Outcomes
+- Improved mental math skills.
+- Enhanced problem-solving abilities.
+- Increased confidence in handling mathematical concepts.
+
+## File Structure
+```
+/Modelmath
+├── assets
+│   └── images
+├── src
+│   ├── game.js
+│   └── mathUtils.js
+└── README.md
+```
+
+## Educational Alignment with Singapore PSLE Curriculum
+- The game aligns with the PSLE curriculum by covering topics such as number theory, fractions, and geometry.
+- Exercises are designed to prepare students for the types of questions encountered in the PSLE exams.
